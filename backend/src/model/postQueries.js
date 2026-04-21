@@ -23,3 +23,21 @@ export const searchPostsByTitle = async (title) => {
     );
     return res.rows;
 };
+
+//query to edit posts
+export const editPost = async (id, title, content) => {
+    const res = await pool.query(
+        "UPDATE posts SET title = $1, content = $2 WHERE id = $3 RETURNING *",
+        [title, content, id]
+    );
+    return res.rows[0];
+};
+
+//query to delete post
+export const deletePost = async (id) => {
+    const res = await pool.query(
+        "DELETE FROM posts WHERE id = $1 RETURNING *",
+        [id]
+    );
+    return res.rows[0];
+};

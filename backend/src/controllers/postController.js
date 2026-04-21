@@ -1,4 +1,4 @@
-import { createPost, getAllPosts, searchPostsByTitle } from "../model/postQueries.js";
+import { createPost, getAllPosts, searchPostsByTitle, editPost, deletePost } from "../model/postQueries.js";
 
 //controller to create a new post
 export const createPostController = async (req, res) => {
@@ -33,5 +33,30 @@ export const searchPostsByTitleController = async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Failed to search posts" });
+    }
+};
+
+//controller to edit a post
+export const editPostController = async (req, res) => {
+    const { id } = req.params;
+    const { title, content } = req.body;
+    try {
+        const updatedPost = await editPost(id, title, content);
+        res.json(updatedPost);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to edit post" });
+    }
+};
+
+//controller to delete a post
+export const deletePostController = async (req, res) => {
+    const { id } = req.params;
+    try {
+        await deletePost(id);
+        res.json({ message: "Post deleted successfully" });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to delete post" });
     }
 };
