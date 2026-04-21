@@ -1,10 +1,20 @@
-//user routes
-const express = require("express");
+import express from "express";
+import {
+  getUserProfile,
+  registerUser,
+  editUserProfile,
+  removeUser,
+  login,
+} from "../controllers/userController.js";
+
 const router = express.Router();
 
-// Get all users
-router.get("/", (req, res) => {
-  res.json({ message: "Get all users" });
-});
+// Get user profile by id
 
-module.exports = router;
+router.get("/profile/:id", getUserProfile);
+router.post("/register", registerUser);
+router.put("/profile/:id", editUserProfile);
+router.delete("/profile/:id", removeUser);
+router.post("/login", login);
+
+export default router;
