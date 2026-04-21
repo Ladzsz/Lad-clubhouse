@@ -9,8 +9,6 @@ import {
 
 const router = express.Router();
 
-// Get user profile by id
-
 router.get("/profile/:id", getUserProfile);
 router.post("/register", registerUser);
 router.put("/profile/:id", editUserProfile);

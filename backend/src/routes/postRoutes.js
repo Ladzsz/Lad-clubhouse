@@ -1,10 +1,7 @@
-//user routes
-const express = require("express");
+import express from "express";
+import { createPostController } from "../controllers/postController.js";
 const router = express.Router();
 
-// Get all posts
-router.get("/", (req, res) => {
-  res.json({ message: "Get all posts" });
-});
+router.post("/createpost/:id", createPostController);
 
-module.exports = router;
+export default router;
