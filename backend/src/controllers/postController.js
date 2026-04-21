@@ -4,6 +4,15 @@ import { createPost, getAllPosts, searchPostsByTitle, editPost, deletePost } fro
 export const createPostController = async (req, res) => {
     const { title, content } = req.body;
     const poster = req.params.id; 
+
+    if (!title || !content) {
+        return res.status(400).json({ error: "Title and content are required" });
+    }
+
+    if (!poster) {
+        return res.status(400).json({ error: "Poster is required" });
+    }
+    
     try {
         const newPost = await createPost(poster, title, content);
         res.status(200).json(newPost);

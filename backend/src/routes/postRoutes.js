@@ -4,7 +4,6 @@ const router = express.Router();
 
 router.get("/", getAllPostsController);
 router.get("/search/:title", searchPostsByTitleController);
-
 router.post("/createpost/:id", createPostController);
 router.put("/editpost/:id", editPostController);
 router.delete("/deletepost/:id", deletePostController);
