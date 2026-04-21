@@ -1,4 +1,10 @@
-import { getUserData, createUser, updateUser, deleteUser, loginUser } from "../model/userQueries.js";
+import {
+  getUserData,
+  createUser,
+  updateUser,
+  deleteUser,
+  loginUser,
+} from "../model/userQueries.js";
 
 //get user controller
 export const getUserProfile = async (req, res) => {
@@ -15,8 +21,8 @@ export const getUserProfile = async (req, res) => {
   } catch (err) {
     console.error("error:", err);
     return res.status(500).json({
-    error: "An error occurred while fetching user data",
-  });
+      error: "An error occurred while fetching user data",
+    });
   }
 };
 

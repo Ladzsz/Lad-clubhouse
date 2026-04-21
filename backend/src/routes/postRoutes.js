@@ -1,5 +1,11 @@
 import express from "express";
-import { createPostController, getAllPostsController, searchPostsByTitleController, editPostController, deletePostController  } from "../controllers/postController.js";
+import {
+  createPostController,
+  getAllPostsController,
+  searchPostsByTitleController,
+  editPostController,
+  deletePostController,
+} from "../controllers/postController.js";
 const router = express.Router();
 
 router.get("/", getAllPostsController);
