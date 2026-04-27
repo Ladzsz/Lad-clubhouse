@@ -1,4 +1,5 @@
 import express from "express";
+import { ensureAuthenticated } from "../config/passport.js";
 import {
   createPostController,
   getAllPostsController,
@@ -10,8 +11,8 @@ const router = express.Router();
 
 router.get("/", getAllPostsController);
 router.get("/search/:title", searchPostsByTitleController);
-router.post("/createpost/:id", createPostController);
-router.put("/editpost/:id", editPostController);
-router.delete("/deletepost/:id", deletePostController);
+router.post("/createpost/:id", ensureAuthenticated, createPostController);
+router.put("/editpost/:id", ensureAuthenticated, editPostController);
+router.delete("/deletepost/:id", ensureAuthenticated, deletePostController);
 
 export default router;
