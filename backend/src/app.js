@@ -8,6 +8,8 @@ import path from "path";
 import userRoutes from "./routes/userRoutes.js";
 import postRoutes from "./routes/postRoutes.js";
 import { fileURLToPath } from "url";
+import passport from 'passport';
+import session from 'express-session';
 
 const app = express();
 
@@ -19,6 +21,15 @@ app.use(express.urlencoded({ extended: true }));
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, "..", "public")));
+
+// Initialize Passport
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Define routes
 app.use("/api/users", userRoutes);
