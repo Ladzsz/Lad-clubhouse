@@ -3,7 +3,7 @@ import { pool } from "../model/pool.js";
 import bcrypt from "bcryptjs";
 
 //auth logic for passport
-export default function initialize(passport) {
+export function initialize(passport) {
   passport.use(
     new LocalStrategy(
       { usernameField: "email" },

@@ -10,10 +10,10 @@ import postRoutes from "./routes/postRoutes.js";
 import { fileURLToPath } from "url";
 import passport from "passport";
 import session from "express-session";
-import initializePassport from "./config/passport.js";
+import { initialize } from "./config/passport.js";
 
 // initializing passport and setting express app
-initializePassport(passport);
+initialize(passport);
 const app = express();
 
 // Middleware
