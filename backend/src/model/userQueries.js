@@ -50,15 +50,3 @@ export const deleteUser = async (userId) => {
   ]);
   return res.rows[0];
 };
-
-//query to login user
-export const loginUser = async (email, password) => {
-  const res = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
-
-  const user = res.rows[0];
-  if (user && (await bcrypt.compare(password, user.password))) {
-    return user;
-  } else {
-    throw new Error("Invalid email or password");
-  }
-};

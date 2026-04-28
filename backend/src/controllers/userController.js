@@ -3,7 +3,6 @@ import {
   createUser,
   updateUser,
   deleteUser,
-  loginUser,
 } from "../model/userQueries.js";
 
 //get user controller
@@ -57,20 +56,5 @@ export const removeUser = async (req, res) => {
     res.json({ message: "User deleted successfully" });
   } catch (err) {
     res.status(500).json({ error: "Failed to delete user" });
-  }
-};
-
-//login user controller
-export const login = async (req, res) => {
-  const { email, password } = req.body;
-  try {
-    const user = await loginUser(email, password);
-    if (user) {
-      res.json(user);
-    } else {
-      res.status(401).json({ error: "Invalid email or password" });
-    }
-  } catch (err) {
-    res.status(500).json({ error: "Failed to login" });
   }
 };
