@@ -14,6 +14,7 @@ router.get("/profile/:id", ensureAuthenticated, getUserProfile);
 router.post("/register", registerUser);
 router.put("/profile/:id", ensureAuthenticated, editUserProfile);
 router.delete("/profile/:id", ensureAuthenticated, removeUser);
+
 router.post(
   "/login",
   passport.authenticate("local", {
@@ -22,6 +23,12 @@ router.post(
     failureFlash: true,
   })
 );
+router.post('/logout', function(req, res, next) {
+  req.logout(function(err) {
+    if (err) { return next(err); }
+    res.redirect('/');
+  });
+});
 
 
 export default router;
