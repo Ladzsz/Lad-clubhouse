@@ -1,5 +1,5 @@
 import express from "express";
-import passport from 'passport';
+import passport from "passport";
 import { ensureAuthenticated } from "../config/passport.js";
 import {
   getUserProfile,
@@ -21,14 +21,15 @@ router.post(
     successRedirect: "/",
     failureRedirect: "/login",
     failureFlash: true,
-  })
+  }),
 );
-router.post('/logout', function(req, res, next) {
-  req.logout(function(err) {
-    if (err) { return next(err); }
-    res.redirect('/');
+router.post("/logout", function (req, res, next) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
   });
 });
-
 
 export default router;
