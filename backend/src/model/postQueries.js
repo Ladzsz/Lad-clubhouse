@@ -15,13 +15,10 @@ export const getPoster = async (postId) => {
         FROM users
         LEFT JOIN posts ON users.id = posts.poster
         WHERE posts.id = $1;`;
+
   const values = [postId];
-  try {
-    const res = await pool.query(query, values);
-    return res.rows[0];
-  } catch (err) {
-    throw err;
-  }
+  const res = await pool.query(query, values);
+  return res.rows[0];
 };
 
 //query to get all posts
