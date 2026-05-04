@@ -1,8 +1,4 @@
-import {
-  createUser,
-  updateUser,
-  deleteUser,
-} from "../model/userQueries.js";
+import { createUser, updateUser, deleteUser } from "../model/userQueries.js";
 
 //create user controller
 export const registerUser = async (req, res) => {

@@ -11,7 +11,7 @@ import {
 const router = express.Router();
 
 router.get("/", getAllPostsController);
-router.get("/poster/:id", ensureAuthenticated,getPosterDataController);
+router.get("/poster/:id", ensureAuthenticated, getPosterDataController);
 router.get("/search/:title", searchPostsByTitleController);
 router.post("/createpost/:id", ensureAuthenticated, createPostController);
 router.put("/editpost/:id", ensureAuthenticated, editPostController);

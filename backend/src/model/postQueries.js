@@ -22,7 +22,7 @@ export const getPoster = async (postId) => {
   } catch (err) {
     throw err;
   }
-}
+};
 
 //query to get all posts
 export const getAllPosts = async () => {
