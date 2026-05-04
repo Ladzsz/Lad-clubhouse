@@ -1,29 +1,8 @@
 import {
-  getUserData,
   createUser,
   updateUser,
   deleteUser,
 } from "../model/userQueries.js";
-
-//get user controller
-export const getUserProfile = async (req, res) => {
-  try {
-    const userId = req.params.id;
-
-    const userData = await getUserData(userId);
-
-    if (!userData) {
-      return res.status(404).json({ error: "User not found" });
-    }
-
-    return res.json(userData);
-  } catch (err) {
-    console.error("error:", err);
-    return res.status(500).json({
-      error: "An error occurred while fetching user data",
-    });
-  }
-};
 
 //create user controller
 export const registerUser = async (req, res) => {

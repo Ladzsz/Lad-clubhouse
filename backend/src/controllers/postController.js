@@ -4,6 +4,7 @@ import {
   searchPostsByTitle,
   editPost,
   deletePost,
+  getPoster,
 } from "../model/postQueries.js";
 
 //controller to create a new post
@@ -73,5 +74,17 @@ export const deletePostController = async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to delete post" });
+  }
+};
+
+//controller to get poster data for a post
+export const getPosterDataController = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const posterData = await getPoster(id);
+    res.json(posterData);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch poster" });
   }
 };

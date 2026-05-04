@@ -1,20 +1,6 @@
 import { pool } from "../model/pool.js";
 import bcrypt from "bcryptjs";
 
-// query to grab user data for profile page
-export async function getUserData(userId) {
-  const query = "SELECT username, createdat FROM users WHERE id = $1;";
-  const values = [userId];
-
-  try {
-    const res = await pool.query(query, values);
-    console.log(res.rows[0]);
-    return res.rows[0];
-  } catch (err) {
-    throw err;
-  }
-}
-
 //query to create user
 export const createUser = async (
   username,

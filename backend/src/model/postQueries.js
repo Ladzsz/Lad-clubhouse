@@ -9,6 +9,21 @@ export const createPost = async (poster, title, content) => {
   return res.rows[0];
 };
 
+//query to get poster data for a post
+export const getPoster = async (postId) => {
+  const query = `SELECT users.username, users.createdat
+        FROM users
+        LEFT JOIN posts ON users.id = posts.poster
+        WHERE posts.id = $1;`;
+  const values = [postId];
+  try {
+    const res = await pool.query(query, values);
+    return res.rows[0];
+  } catch (err) {
+    throw err;
+  }
+}
+
 //query to get all posts
 export const getAllPosts = async () => {
   const res = await pool.query("SELECT * FROM posts");
