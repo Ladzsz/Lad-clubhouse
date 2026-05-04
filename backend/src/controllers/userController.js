@@ -29,7 +29,7 @@ export const removeUser = async (req, res) => {
   try {
     await deleteUser(userId);
     res.json({ message: "User deleted successfully" });
-  } catch { 
+  } catch {
     res.status(500).json({ error: "Failed to delete user" });
   }
 };
