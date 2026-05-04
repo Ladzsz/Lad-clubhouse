@@ -23,7 +23,7 @@ export const createPostController = async (req, res) => {
   try {
     const newPost = await createPost(poster, title, content);
     res.status(200).json(newPost);
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: "Failed to create post" });
   }
 };
@@ -33,7 +33,7 @@ export const getAllPostsController = async (req, res) => {
   try {
     const posts = await getAllPosts();
     res.json(posts);
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: "Failed to fetch posts" });
   }
 };
@@ -44,7 +44,7 @@ export const searchPostsByTitleController = async (req, res) => {
   try {
     const posts = await searchPostsByTitle(title);
     res.json(posts);
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: "Failed to search posts" });
   }
 };
@@ -56,7 +56,7 @@ export const editPostController = async (req, res) => {
   try {
     const updatedPost = await editPost(id, title, content);
     res.json(updatedPost);
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: "Failed to edit post" });
   }
 };
@@ -67,7 +67,7 @@ export const deletePostController = async (req, res) => {
   try {
     await deletePost(id);
     res.json({ message: "Post deleted successfully" });
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: "Failed to delete post" });
   }
 };
@@ -78,7 +78,7 @@ export const getPosterDataController = async (req, res) => {
   try {
     const posterData = await getPoster(id);
     res.json(posterData);
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: "Failed to fetch poster" });
   }
 };
