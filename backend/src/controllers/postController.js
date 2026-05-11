@@ -58,17 +58,15 @@ export const editPostController = async (req, res) => {
   const { id } = req.params;
   const { title, content } = req.body;
   try {
-
     //grabbing post
-    const post = await pool.query(
-      "SELECT * FROM posts WHERE id = $1",
-      [req.params.id]
-    );
+    const post = await pool.query("SELECT * FROM posts WHERE id = $1", [
+      req.params.id,
+    ]);
 
-     // ownership check
+    // ownership check
     if (String(req.user.id) !== String(post.rows[0].poster)) {
       return res.status(403).json({
-        message: "Unauthorized: you cannot manipulate this post."
+        message: "Unauthorized: you cannot manipulate this post.",
       });
     }
 
@@ -84,17 +82,15 @@ export const editPostController = async (req, res) => {
 export const deletePostController = async (req, res) => {
   const { id } = req.params;
   try {
-    
     //grabbing post
-    const post = await pool.query(
-      "SELECT * FROM posts WHERE id = $1",
-      [req.params.id]
-    );
+    const post = await pool.query("SELECT * FROM posts WHERE id = $1", [
+      req.params.id,
+    ]);
 
-     // ownership check
+    // ownership check
     if (String(req.user.id) !== String(post.rows[0].poster)) {
       return res.status(403).json({
-        message: "Unauthorized: you cannot manipulate this post."
+        message: "Unauthorized: you cannot manipulate this post.",
       });
     }
     await deletePost(id);
