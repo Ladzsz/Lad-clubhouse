@@ -6,6 +6,7 @@ import {
   deletePost,
   getPoster,
 } from "../model/postQueries.js";
+import { pool } from "../model/pool.js";
 
 //controller to create a new post
 export const createPostController = async (req, res) => {
@@ -57,6 +58,20 @@ export const editPostController = async (req, res) => {
   const { id } = req.params;
   const { title, content } = req.body;
   try {
+
+    //grabbing post
+    const post = await pool.query(
+      "SELECT * FROM posts WHERE id = $1",
+      [req.params.id]
+    );
+
+     // ownership check
+    if (String(req.user.id) !== String(post.rows[0].poster)) {
+      return res.status(403).json({
+        message: "Unauthorized: you cannot manipulate this post."
+      });
+    }
+
     const updatedPost = await editPost(id, title, content);
     res.json(updatedPost);
   } catch (err) {
@@ -69,6 +84,19 @@ export const editPostController = async (req, res) => {
 export const deletePostController = async (req, res) => {
   const { id } = req.params;
   try {
+    
+    //grabbing post
+    const post = await pool.query(
+      "SELECT * FROM posts WHERE id = $1",
+      [req.params.id]
+    );
+
+     // ownership check
+    if (String(req.user.id) !== String(post.rows[0].poster)) {
+      return res.status(403).json({
+        message: "Unauthorized: you cannot manipulate this post."
+      });
+    }
     await deletePost(id);
     res.json({ message: "Post deleted successfully" });
   } catch (err) {
@@ -82,6 +110,11 @@ export const getPosterDataController = async (req, res) => {
   const { id } = req.params;
   try {
     const posterData = await getPoster(id);
+
+    if (!posterData) {
+      res.status(500).json({ message: "Deleted user" });
+    }
+
     res.json(posterData);
   } catch (err) {
     console.error(err);

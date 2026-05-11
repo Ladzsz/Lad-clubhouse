@@ -17,6 +17,14 @@ export const editUserProfile = async (req, res) => {
   const userId = req.params.id;
   const { username, email, password } = req.body;
   try {
+
+     // check user  
+    if (String(req.user.id) !== String(req.params.id)) {
+      return res.status(403).json({
+        message: "Unauthorized: you cannot manipulate this post."
+      });
+    }
+
     const updatedUser = await updateUser(userId, username, email, password);
     res.json(updatedUser);
   } catch (err) {
@@ -29,6 +37,14 @@ export const editUserProfile = async (req, res) => {
 export const removeUser = async (req, res) => {
   const userId = req.params.id;
   try {
+    
+     // check user  
+    if (String(req.user.id) !== String(req.params.id)) {
+      return res.status(403).json({
+        message: "Unauthorized: you cannot manipulate this post."
+      });
+    }
+
     await deleteUser(userId);
     res.json({ message: "User deleted successfully" });
   } catch (err) {
