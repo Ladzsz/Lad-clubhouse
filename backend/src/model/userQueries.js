@@ -43,3 +43,12 @@ export const saveResetToken = async (userId, hashedToken, expires) => {
     [userId, hashedToken, expires]
   );
 };
+
+//update password query
+export const updatePassword = async (userId, newPassword) => {
+  const hashedPassword = await bcrypt.hash(newPassword, 10);
+  await pool.query(
+    "UPDATE users SET password = $2, hashed_token = NULL, token_expires_at = NULL WHERE id = $1",
+    [userId, hashedPassword]
+  );
+};

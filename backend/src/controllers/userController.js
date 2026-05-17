@@ -1,4 +1,4 @@
-import { createUser, updateUser, deleteUser, saveResetToken } from "../model/userQueries.js";
+import { createUser, updateUser, deleteUser, saveResetToken, updatePassword } from "../model/userQueries.js";
 import { generateResetToken, sendResetEmail } from "../utils/emailService.js";
 import { pool } from "../model/pool.js";
 
@@ -79,5 +79,54 @@ export const sendresetPassword = async (req, res) => {
     res.json({
       message: "If email exists reset email sent",
     });
+  }
+};
+
+//confirm password reset controller
+export const confirmResetPassword = async (req, res) => {
+  const { token, newPassword } = req.body;
+
+  try {
+    // hash incoming token
+    const hashedToken = crypto
+      .createHash("sha256")
+      .update(token)
+      .digest("hex");
+
+    // find matching token
+    const result = await pool.query(
+      `
+      SELECT id, token_expires_at
+      FROM users
+      WHERE hashed_token = $1
+      `,
+      [hashedToken]
+    );
+
+    // invalid token
+    if (result.rows.length === 0) {
+      return res.status(400).json({
+        message: "Invalid reset token",
+      });
+    }
+
+    const user = result.rows[0];
+
+    // expired token
+    if (new Date(user.token_expires_at) < new Date()) {
+      return res.status(400).json({
+        message: "Reset token expired",
+      });
+    }
+
+    // update password
+    await updatePassword(user.id, newPassword);
+
+    res.json({
+      message: "Password reset successful",
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to reset password" });
   }
 };
