@@ -1,4 +1,10 @@
-import { createUser, updateUser, deleteUser, saveResetToken, updatePassword } from "../model/userQueries.js";
+import {
+  createUser,
+  updateUser,
+  deleteUser,
+  saveResetToken,
+  updatePassword,
+} from "../model/userQueries.js";
 import { generateResetToken, sendResetEmail } from "../utils/emailService.js";
 import { pool } from "../model/pool.js";
 
@@ -59,7 +65,6 @@ export const sendresetPassword = async (req, res) => {
   const { email } = req.body;
 
   try {
-
     //get token and expires
     const { token, hashedToken, expires } = generateResetToken();
 
@@ -72,7 +77,6 @@ export const sendresetPassword = async (req, res) => {
     res.json({
       message: "If email exists reset email sent",
     });
-
   } catch (err) {
     console.error(err);
 
@@ -88,10 +92,7 @@ export const confirmResetPassword = async (req, res) => {
 
   try {
     // hash incoming token
-    const hashedToken = crypto
-      .createHash("sha256")
-      .update(token)
-      .digest("hex");
+    const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
 
     // find matching token
     const result = await pool.query(
@@ -100,7 +101,7 @@ export const confirmResetPassword = async (req, res) => {
       FROM users
       WHERE hashed_token = $1
       `,
-      [hashedToken]
+      [hashedToken],
     );
 
     // invalid token

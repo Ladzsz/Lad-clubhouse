@@ -20,10 +20,9 @@ export const createUser = async (
 
 //query to update user
 export const updateUser = async (userId, username) => {
-
   const res = await pool.query(
     "UPDATE users SET username = $2, updatedat = NOW() WHERE id = $1 RETURNING *",
-    [userId, username,]
+    [userId, username],
   );
   return res.rows[0];
 };
@@ -40,7 +39,7 @@ export const deleteUser = async (userId) => {
 export const saveResetToken = async (userId, hashedToken, expires) => {
   await pool.query(
     "UPDATE users SET hashed_token = $2, token_expires_at = $3 WHERE id = $1",
-    [userId, hashedToken, expires]
+    [userId, hashedToken, expires],
   );
 };
 
@@ -49,6 +48,6 @@ export const updatePassword = async (userId, newPassword) => {
   const hashedPassword = await bcrypt.hash(newPassword, 10);
   await pool.query(
     "UPDATE users SET password = $2, hashed_token = NULL, token_expires_at = NULL WHERE id = $1",
-    [userId, hashedPassword]
+    [userId, hashedPassword],
   );
 };
