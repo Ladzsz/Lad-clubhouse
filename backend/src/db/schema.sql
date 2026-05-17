@@ -69,7 +69,9 @@ CREATE TABLE public.users (
     email character varying(100) NOT NULL,
     ismember boolean DEFAULT false,
     createdat timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
-    updatedat timestamp without time zone DEFAULT CURRENT_TIMESTAMP
+    updatedat timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    hashed_token character varying(255),
+    token_expires_at timestamp without time zone
 );
 
 
