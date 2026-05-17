@@ -19,12 +19,11 @@ export const createUser = async (
 };
 
 //query to update user
-export const updateUser = async (userId, username, email, password) => {
-  const hashedPassword = await bcrypt.hash(password, 10);
+export const updateUser = async (userId, username) => {
 
   const res = await pool.query(
-    "UPDATE users SET username = $2, email = $3, password = $4, updatedat = NOW() WHERE id = $1 RETURNING *",
-    [userId, username, email, hashedPassword],
+    "UPDATE users SET username = $2, updatedat = NOW() WHERE id = $1 RETURNING *",
+    [userId, username,]
   );
   return res.rows[0];
 };
@@ -35,4 +34,12 @@ export const deleteUser = async (userId) => {
     userId,
   ]);
   return res.rows[0];
+};
+
+//query to save reset token and expires
+export const saveResetToken = async (userId, hashedToken, expires) => {
+  await pool.query(
+    "UPDATE users SET hashed_token = $2, token_expires_at = $3 WHERE id = $1",
+    [userId, hashedToken, expires]
+  );
 };
