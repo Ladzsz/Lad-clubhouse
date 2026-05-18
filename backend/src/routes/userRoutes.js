@@ -5,11 +5,15 @@ import {
   registerUser,
   editUserProfile,
   removeUser,
+    sendresetPassword,
+    confirmResetPassword,
 } from "../controllers/userController.js";
 
 const router = express.Router();
 
 router.post("/register", registerUser);
+router.post("/reset-password", sendresetPassword);
+router.post("/confirm-reset-password/:token", confirmResetPassword);
 router.put("/profile/:id", ensureAuthenticated, editUserProfile);
 router.delete("/profile/:id", ensureAuthenticated, removeUser);
 

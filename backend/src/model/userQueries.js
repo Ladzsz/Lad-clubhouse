@@ -36,10 +36,10 @@ export const deleteUser = async (userId) => {
 };
 
 //query to save reset token and expires
-export const saveResetToken = async (userId, hashedToken, expires) => {
+export const saveResetToken = async (email, hashedToken, expires) => {
   await pool.query(
-    "UPDATE users SET hashed_token = $2, token_expires_at = $3 WHERE id = $1",
-    [userId, hashedToken, expires],
+    "UPDATE users SET hashed_token = $2, token_expires_at = $3 WHERE email = $1",
+    [email, hashedToken, expires],
   );
 };
 

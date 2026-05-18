@@ -7,6 +7,7 @@ import {
 } from "../model/userQueries.js";
 import { generateResetToken, sendResetEmail } from "../utils/emailService.js";
 import { pool } from "../model/pool.js";
+import crypto from "crypto";
 
 //create user controller
 export const registerUser = async (req, res) => {
@@ -61,15 +62,15 @@ export const removeUser = async (req, res) => {
 
 //send reset password controller
 export const sendresetPassword = async (req, res) => {
-  const userId = req.params.id;
   const { email } = req.body;
 
   try {
     //get token and expires
     const { token, hashedToken, expires } = generateResetToken();
 
+
     //save token and expires to db
-    await saveResetToken(userId, hashedToken, expires);
+    await saveResetToken(email, hashedToken, expires);
 
     // send token to email
     await sendResetEmail(email, token);
@@ -88,7 +89,8 @@ export const sendresetPassword = async (req, res) => {
 
 //confirm password reset controller
 export const confirmResetPassword = async (req, res) => {
-  const { token, newPassword } = req.body;
+  const { newPassword } = req.body;
+  const token = req.params.token;
 
   try {
     // hash incoming token
