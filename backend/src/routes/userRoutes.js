@@ -5,8 +5,8 @@ import {
   registerUser,
   editUserProfile,
   removeUser,
-    sendresetPassword,
-    confirmResetPassword,
+  sendresetPassword,
+  confirmResetPassword,
 } from "../controllers/userController.js";
 
 const router = express.Router();

@@ -68,7 +68,6 @@ export const sendresetPassword = async (req, res) => {
     //get token and expires
     const { token, hashedToken, expires } = generateResetToken();
 
-
     //save token and expires to db
     await saveResetToken(email, hashedToken, expires);
 
