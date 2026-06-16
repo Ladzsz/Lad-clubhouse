@@ -1,81 +1,81 @@
 /* navbar */
 .navbar {
-    background-color: var(--primary);
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    width: 100%;
-    position: relative;
-    height: 120px;
+  background-color: var(--primary);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+  position: relative;
+  height: 120px;
 }
 
 /* nav links */
 .navbar ul {
-    display: flex;
-    list-style: none;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 100%;
+  display: flex;
+  list-style: none;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
 }
 
 /* nav images */
 .navimg1,
 .navimg2 {
-    position: absolute;
-    top: 10px;
+  position: absolute;
+  top: 10px;
 }
 
 .navimg1 {
-    left: 10px;
+  left: 10px;
 }
 
 .navimg2 {
-    right: 10px;
+  right: 10px;
 }
 
 .navimg1,
 .navimg2 {
-    height: 100px;
-    width: auto;
+  height: 100px;
+  width: auto;
 }
 
 .navbtn {
-    font-size: 24px;
+  font-size: 24px;
 }
 
 /* media queries */
 @media (max-width: 900px) {
-    .navimg1,
-    .navimg2 {
-        height: 75px;
-        top: 25px;
-    }
+  .navimg1,
+  .navimg2 {
+    height: 75px;
+    top: 25px;
+  }
 
-    .navbtn {
+  .navbtn {
     font-size: 20px;
-}
+  }
 }
 
 @media (max-width: 650px) {
-    .navimg1,
-    .navimg2 {
-        height: 50px;
-        top: 35px;
-    }
-    .navbtn {
+  .navimg1,
+  .navimg2 {
+    height: 50px;
+    top: 35px;
+  }
+  .navbtn {
     font-size: 18px;
-}
+  }
 }
 
 @media (max-width: 370px) {
-    .navbar ul {
+  .navbar ul {
     display: flex;
     list-style: none;
     align-items: center;
     justify-content: center;
     width: 100%;
     gap: 0.5rem;
-}
+  }
 }

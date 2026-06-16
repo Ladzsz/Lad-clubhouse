@@ -184,21 +184,13 @@ ul {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(
-    180deg,
-    var(--primary),
-    var(--danger)
-  );
+  background: linear-gradient(180deg, var(--primary), var(--danger));
   border-radius: 999px;
   border: 2px solid var(--bg);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(
-    180deg,
-    var(--primary-light),
-    var(--warning)
-  );
+  background: linear-gradient(180deg, var(--primary-light), var(--warning));
 }
 
 /* Firefox */
