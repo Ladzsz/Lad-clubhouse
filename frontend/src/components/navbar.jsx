@@ -13,8 +13,12 @@ function Navbar() {
           />
         </div>
         <ul>
-          <Link to="/"><li className="btn navbtn navtext">Home</li></Link>
-          <Link to="posts"><li className="btn navbtn navtext">Posts</li></Link>
+          <Link to="/">
+            <li className="btn navbtn navtext">Home</li>
+          </Link>
+          <Link to="posts">
+            <li className="btn navbtn navtext">Posts</li>
+          </Link>
         </ul>
         <div className="navImg">
           <img

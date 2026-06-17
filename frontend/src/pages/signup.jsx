@@ -1,7 +1,7 @@
 function Signup() {
   return (
     <>
-     <h1>im the signup page</h1>
+      <h1>im the signup page</h1>
     </>
   );
 }

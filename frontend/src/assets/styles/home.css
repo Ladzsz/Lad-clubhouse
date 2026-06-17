@@ -1,90 +1,91 @@
 /*header*/
 header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /*text*/
 .home-text-div {
-    max-width: 900px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 20px;
+  max-width: 900px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
 }
 
 .home-h1 {
-    text-align: center;
-    font-weight: bold;
-    font-size: 86px;
-    margin-top: 20px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 86px;
+  margin-top: 20px;
 }
 
 .home-p {
-    text-align: center;
-    font-weight: 600;
-    font-size: 26px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 26px;
 }
 
 /*butttons*/
 .home-btn-sec {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
 }
 
 .home-btn-container {
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
 }
 
 .home-btn {
-    background-color: var(--primary);
-    color: var(--text);
-    padding: 20px;
-    border-radius: 16px;
-    font-weight: bold;
-    font-size: 24px;
-    transform: translateY(0);
-    transition: transform 0.3s ease, color 0.3s ease;
+  background-color: var(--primary);
+  color: var(--text);
+  padding: 20px;
+  border-radius: 16px;
+  font-weight: bold;
+  font-size: 24px;
+  transform: translateY(0);
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
 }
 
 .home-btn:hover {
-    color: var(--text-muted);
-    transform: translateY(-10px);
+  color: var(--text-muted);
+  transform: translateY(-10px);
 }
 
 /*media queries*/
 @media (max-width: 768px) {
-    .home-h1 {
+  .home-h1 {
     font-size: 64px;
-}
+  }
 
-.home-p {
+  .home-p {
     font-size: 22px;
-}
+  }
 
-.home-btn {
+  .home-btn {
     font-size: 20px;
-}
+  }
 }
 
 @media (max-width: 450px) {
-    .home-h1 {
+  .home-h1 {
     font-size: 48px;
-}
+  }
 
-.home-p {
+  .home-p {
     font-size: 18px;
-}
+  }
 
-.home-btn {
-   font-size: 16px;
-}
+  .home-btn {
+    font-size: 16px;
+  }
 }
