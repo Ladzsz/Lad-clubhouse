@@ -60,6 +60,7 @@ header {
     transform: translateY(-10px);
 }
 
+/*media queries*/
 @media (max-width: 768px) {
     .home-h1 {
     font-size: 64px;
