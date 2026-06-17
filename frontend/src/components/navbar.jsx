@@ -1,4 +1,5 @@
 import "../assets/styles/navbar.css";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -12,8 +13,8 @@ function Navbar() {
           />
         </div>
         <ul>
-          <li className="btn navbtn navtext">Home</li>
-          <li className="btn navbtn navtext">Posts</li>
+          <Link to="/"><li className="btn navbtn navtext">Home</li></Link>
+          <Link to="posts"><li className="btn navbtn navtext">Posts</li></Link>
         </ul>
         <div className="navImg">
           <img
