@@ -1,16 +1,16 @@
-import { useState } from 'react';
-import '../assets/styles/signup.css'
+import { useState } from "react";
+import "../assets/styles/signup.css";
 import { Link } from "react-router-dom";
 
 export function Signup() {
   //setting form variables and states
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   //handling form change
   const handleChange = (e) => {
@@ -20,20 +20,20 @@ export function Signup() {
   //handling form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     //password match error
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
+      setError("Passwords do not match");
       return;
     }
-    setError('');
+    setError("");
 
     //api call to create user
     try {
-      const response = await fetch('http://localhost:5000/api/users/register', {
-        method: 'POST',
+      const response = await fetch("http://localhost:5000/api/users/register", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           username: formData.username,
@@ -43,25 +43,23 @@ export function Signup() {
       });
 
       if (!response.ok) {
-        throw new Error('Registration failed');
+        throw new Error("Registration failed");
       }
 
-      alert("User created!")
-
+      alert("User created!");
     } catch (err) {
-      setError(err.message || 'Something went wrong');
+      setError(err.message || "Something went wrong");
     }
   };
 
   //rendering form
   return (
-    <div className='form-container'>
+    <div className="form-container">
       <h2>Register</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={handleSubmit} method="POST" className='signup-form'>
-
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      <form onSubmit={handleSubmit} method="POST" className="signup-form">
         {/*form inputs*/}
-        <div className='form-input-container'>
+        <div className="form-input-container">
           <label htmlFor="username">Username:</label>
           <input
             type="text"
@@ -70,11 +68,10 @@ export function Signup() {
             value={formData.username}
             onChange={handleChange}
             required
-            
           />
         </div>
-        
-        <div className='form-input-container'>
+
+        <div className="form-input-container">
           <label htmlFor="email">Email:</label>
           <input
             type="email"
@@ -83,11 +80,10 @@ export function Signup() {
             value={formData.email}
             onChange={handleChange}
             required
-            
           />
         </div>
 
-        <div className='form-input-container'>
+        <div className="form-input-container">
           <label htmlFor="password">Password:</label>
           <input
             type="password"
@@ -99,7 +95,7 @@ export function Signup() {
           />
         </div>
 
-        <div className='form-input-container'>
+        <div className="form-input-container">
           <label htmlFor="confirmPassword">Confirm Password:</label>
           <input
             type="password"
@@ -111,18 +107,15 @@ export function Signup() {
           />
         </div>
 
-      {/*button*/}
-        <button 
-          type="submit" 
-          className='form-btn'
-        >
+        {/*button*/}
+        <button type="submit" className="form-btn">
           Submit
         </button>
 
         {/*login link*/}
         <Link to="/login">
-            <li className="login-link">go to login</li>
-          </Link>
+          <li className="login-link">go to login</li>
+        </Link>
       </form>
     </div>
   );
