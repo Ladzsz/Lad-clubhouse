@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "../assets/styles/signup.css";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export function Login({ setloggedin }) {
   //setting form variables and states
@@ -38,12 +38,10 @@ export function Login({ setloggedin }) {
         throw new Error("Login failed");
       }
 
- 
       if (response.ok) {
         setloggedin(true);
-    }
-    navigate("/");
-
+      }
+      navigate("/");
     } catch (err) {
       setError(err.message || "Something went wrong");
     }

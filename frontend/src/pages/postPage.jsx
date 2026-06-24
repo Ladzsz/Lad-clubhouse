@@ -1,4 +1,4 @@
-function Postpage({loggedin}) {
+function Postpage({ loggedin }) {
   return <h1>im the post page</h1>;
 }
 
