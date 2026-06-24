@@ -1,7 +1,7 @@
 import "../assets/styles/home.css";
 import { Link } from "react-router-dom";
 
-function Home() {
+function Home({loggedin}) {
   return (
     <>
       <header>
@@ -27,9 +27,17 @@ function Home() {
           <Link to="signup">
             <button className="home-btn">Sign up!</button>
           </Link>
-          <Link to="login">
+
+          {loggedin ? (
+        <Link to="posts">
+            <button className="home-btn">View Posts!</button>
+          </Link>
+      ) : (
+        <Link to="login">
             <button className="home-btn">Log in!</button>
           </Link>
+      )}
+
         </div>
       </section>
     </>

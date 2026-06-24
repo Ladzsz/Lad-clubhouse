@@ -46,4 +46,20 @@ router.post("/logout", function (req, res, next) {
   });
 });
 
+router.get("/me", (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.status(401).json({
+      authenticated: false,
+    });
+  }
+
+  return res.json({
+    authenticated: true,
+    user: {
+      id: req.user.id,
+      email: req.user.email,
+    },
+  });
+});
+
 export default router;
