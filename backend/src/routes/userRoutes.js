@@ -17,14 +17,26 @@ router.post("/confirm-reset-password/:token", confirmResetPassword);
 router.put("/profile/:id", ensureAuthenticated, editUserProfile);
 router.delete("/profile/:id", ensureAuthenticated, removeUser);
 
-router.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/login",
-    failureFlash: true,
-  }),
-);
+router.post("/login", (req, res, next) => {
+  passport.authenticate("local", (err, user) => {
+    if (err) {
+      return next(err);
+    }
+
+    req.logIn(user, (loginErr) => {
+      if (loginErr) {
+        return next(loginErr);
+      }
+      return res.status(200).json({
+        message: "Login successful",
+        user: {
+          id: user.id,
+          email: user.email,
+        },
+      });
+    });
+  })(req, res, next);
+});
 router.post("/logout", function (req, res, next) {
   req.logout(function (err) {
     if (err) {

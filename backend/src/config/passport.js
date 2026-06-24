@@ -15,11 +15,11 @@ export function initialize(passport) {
           ]);
           const user = res.rows[0];
           if (!user) {
-            return done(null, false, { message: "Incorrect email." });
+            return done(null, false, { message: "Invalid credientials." });
           }
 
           if (!(await bcrypt.compare(password, user.password))) {
-            return done(null, false, { message: "Incorrect password." });
+            return done(null, false, { message: "Invalid credientials." });
           }
           return done(null, user);
         } catch (err) {
