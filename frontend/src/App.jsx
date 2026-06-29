@@ -5,6 +5,7 @@ import Login from "./pages/login";
 import Signup from "./pages/signup";
 import Postpage from "./pages/postPage";
 import Forgotpass from "./pages/forgotpass";
+import Resetpass from "./pages/resetpass";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -33,6 +34,7 @@ function App() {
         <Route path="/login" element={<Login setloggedin={setloggedin} />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/forgot-password" element={<Forgotpass />} />
+        <Route path="/reset-password/:token" element={<Resetpass />} />
       </Routes>
     </BrowserRouter>
   );
