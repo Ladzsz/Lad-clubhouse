@@ -21,7 +21,7 @@ export function Resetpass() {
   //handling form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setsending(true)
+    setsending(true);
 
     //password match error
     if (formData.password !== formData.confirmPassword) {
@@ -33,13 +33,16 @@ export function Resetpass() {
 
     // try block for password reset
     try {
-      const response = await fetch(`http://localhost:5000/api/users/confirm-reset-password/${token}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        `http://localhost:5000/api/users/confirm-reset-password/${token}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ newPassword: formData.password }),
         },
-        body: JSON.stringify({ newPassword: formData.password }),
-      });
+      );
 
       if (!response.ok) {
         const data = await response.json().catch(() => ({}));
@@ -90,7 +93,6 @@ export function Resetpass() {
         <button type="submit" className="form-btn">
           {sending ? "resetting" : "Submit"}
         </button>
-
       </form>
     </div>
   );

@@ -19,31 +19,34 @@ export function Forgotpass() {
   //handling form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setsending(true)
+    setsending(true);
 
     //api call to login user
     try {
-      const response = await fetch("http://localhost:5000/api/users/reset-password", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        "http://localhost:5000/api/users/reset-password",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: formData.email,
+          }),
         },
-        body: JSON.stringify({
-          email: formData.email,
-        }),
-      });
+      );
 
       if (!response.ok) {
         throw new Error("failed to send reset email");
       }
 
-      alert("password reset sent to email.")
+      alert("password reset sent to email.");
       navigate("/login");
     } catch (err) {
       setError(err.message || "Something went wrong");
     } finally {
-    setsending(false);
-  }
+      setsending(false);
+    }
   };
 
   //rendering form
