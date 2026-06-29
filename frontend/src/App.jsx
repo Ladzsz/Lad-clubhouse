@@ -4,6 +4,7 @@ import Home from "./pages/home";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
 import Postpage from "./pages/postPage";
+import Forgotpass from "./pages/forgotpass";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -31,6 +32,7 @@ function App() {
         <Route path="/posts" element={<Postpage loggedin={loggedin} />} />
         <Route path="/login" element={<Login setloggedin={setloggedin} />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/forgot-password" element={<Forgotpass />} />
       </Routes>
     </BrowserRouter>
   );
