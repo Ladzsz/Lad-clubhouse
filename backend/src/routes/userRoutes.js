@@ -7,9 +7,11 @@ import {
   removeUser,
   sendresetPassword,
   confirmResetPassword,
+  getUserDetailsController,
 } from "../controllers/userController.js";
 
 const router = express.Router();
+router.get("/", ensureAuthenticated, getUserDetailsController);
 
 router.post("/register", registerUser);
 router.post("/reset-password", sendresetPassword);

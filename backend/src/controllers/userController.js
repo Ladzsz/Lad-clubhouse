@@ -4,10 +4,22 @@ import {
   deleteUser,
   saveResetToken,
   updatePassword,
+  getUserDetails
 } from "../model/userQueries.js";
 import { generateResetToken, sendResetEmail } from "../utils/emailService.js";
 import { pool } from "../model/pool.js";
 import crypto from "crypto";
+
+export const getUserDetailsController = async (req, res) => {
+  try {
+    const userId = req.user.id; 
+    const userDetails = await getUserDetails(userId);
+    res.json(userDetails);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch user details" });
+  }
+};
 
 //create user controller
 export const registerUser = async (req, res) => {

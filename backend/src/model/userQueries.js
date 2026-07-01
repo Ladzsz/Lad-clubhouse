@@ -1,6 +1,15 @@
 import { pool } from "../model/pool.js";
 import bcrypt from "bcryptjs";
 
+//query to get users username and created at
+export const getUserDetails = async (userId) => {
+  const res = await pool.query(
+    "SELECT username, createdat FROM users WHERE id = $1",
+    [userId],
+  );
+  return res.rows[0];
+};
+
 //query to create user
 export const createUser = async (
   username,
