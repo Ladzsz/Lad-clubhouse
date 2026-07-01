@@ -1,0 +1,19 @@
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--primary);
+  width: 100%;
+  padding-top: 0.3rem;
+    padding-bottom: 0.1rem;
+}
+
+.user-icon {
+    color: #fff;
+    transition: 0.2s ease;
+}
+
+.user-icon:hover {
+    color: var(--primary-light);
+    transform: translateY(-2px);
+}

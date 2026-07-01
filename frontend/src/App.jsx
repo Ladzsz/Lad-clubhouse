@@ -6,6 +6,7 @@ import Signup from "./pages/signup";
 import Postpage from "./pages/postPage";
 import Forgotpass from "./pages/forgotpass";
 import Resetpass from "./pages/resetpass";
+import Footer from "./components/footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -27,15 +28,20 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route index element={<Home loggedin={loggedin} />} />
-        <Route path="/posts" element={<Postpage loggedin={loggedin} />} />
-        <Route path="/login" element={<Login setloggedin={setloggedin} />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/forgot-password" element={<Forgotpass />} />
-        <Route path="/reset-password/:token" element={<Resetpass />} />
-      </Routes>
+      <div className="app-shell">
+        <Navbar />
+        <main className="content">
+          <Routes>
+            <Route index element={<Home loggedin={loggedin} />} />
+            <Route path="/posts" element={<Postpage loggedin={loggedin} />} />
+            <Route path="/login" element={<Login setloggedin={setloggedin} />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/forgot-password" element={<Forgotpass />} />
+            <Route path="/reset-password/:token" element={<Resetpass />} />
+          </Routes>
+        </main>
+        <Footer loggedin={loggedin} />
+      </div>
     </BrowserRouter>
   );
 }
