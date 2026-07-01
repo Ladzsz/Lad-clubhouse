@@ -27,10 +27,6 @@ function App() {
       .catch(console.error);
   }, []);
 
-  useEffect(() => {
-    console.log("loggedin:", loggedin);
-  }, [loggedin]);
-
   return (
     <BrowserRouter>
       <div className="app-shell">
@@ -39,19 +35,11 @@ function App() {
           <Routes>
             <Route index element={<Home loggedin={loggedin} />} />
             <Route path="/posts" element={<Postpage loggedin={loggedin} />} />
-            <Route
-              path="/login"
-              element={<Login setloggedin={setloggedin} />}
-            />
+            <Route path="/login" element={<Login setloggedin={setloggedin} />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/forgot-password" element={<Forgotpass />} />
             <Route path="/reset-password/:token" element={<Resetpass />} />
-            <Route
-              path="/accountdeets"
-              element={
-                <AccountDetails setloggedin={setloggedin} loggedin={loggedin} />
-              }
-            />
+            <Route path="/accountdeets" element={<AccountDetails setloggedin={setloggedin} loggedin={loggedin} />} />
           </Routes>
         </main>
         <Footer loggedin={loggedin} />
