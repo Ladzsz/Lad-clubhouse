@@ -44,7 +44,7 @@ router.post("/logout", function (req, res, next) {
     if (err) {
       return next(err);
     }
-    res.redirect("/");
+    res.status(200).json({ message: "Logout successful" });
   });
 });
 
