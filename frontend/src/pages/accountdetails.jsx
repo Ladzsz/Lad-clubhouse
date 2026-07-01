@@ -2,7 +2,7 @@ import "../assets/styles/accountdeets.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-function AccountDetails({ setloggedin , loggedin }) {
+function AccountDetails({ setloggedin, loggedin }) {
   const [error, setError] = useState("");
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
@@ -57,39 +57,36 @@ function AccountDetails({ setloggedin , loggedin }) {
 
   return (
     <>
-    {/*rendering the account details page*/}
+      {/*rendering the account details page*/}
       <section className="account-deets-sec">
         <h1>Account Details</h1>
         {error && <p className="error">{error}</p>}
         <div className="item-container">
+          <div className="account-deets-item">
+            <p className="acc-details-info">
+              Username:{" "}
+              {loggedin ? user?.username || "Loading..." : "Not logged in"}
+            </p>
+            <p>
+              Account Created: {loggedin ? user?.createdat || "Loading..." : ""}
+            </p>
+          </div>
+
+          <div className="acc-btn-container">
             <div className="account-deets-item">
-          <p className="acc-details-info">
-            Username: {loggedin ? user?.username || "Loading..." : "Not logged in"}
-          </p>
-          <p>
-            Account Created: {loggedin ? user?.createdat || "Loading..." : ""}
-          </p>
-        </div>
+              <p className="editbtn btn">Edit account</p>
+            </div>
 
-    <div className="acc-btn-container">
-        <div className="account-deets-item">
-          <p className="editbtn btn">
-            Edit account
-          </p>
-        </div>
+            <div className="account-deets-item">
+              <p className="deletebtn btn">delete account</p>
+            </div>
 
-        <div className="account-deets-item">
-          <p className="deletebtn btn">
-            delete account
-          </p>
-        </div>
-
-        <div className="account-deets-item">
-          <p className="logoutbtn btn" onClick={handleLogout}>
-            Logout
-          </p>
-        </div>
-    </div>
+            <div className="account-deets-item">
+              <p className="logoutbtn btn" onClick={handleLogout}>
+                Logout
+              </p>
+            </div>
+          </div>
         </div>
       </section>
     </>

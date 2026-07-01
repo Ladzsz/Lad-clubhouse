@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { FaUserCircle } from 'react-icons/fa';
-import '../assets/styles/footer.css';
+import { FaUserCircle } from "react-icons/fa";
+import "../assets/styles/footer.css";
 
 function Footer({ loggedin }) {
   return (
