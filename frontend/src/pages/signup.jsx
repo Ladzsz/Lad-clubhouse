@@ -1,8 +1,11 @@
 import { useState } from "react";
 import "../assets/styles/signup.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export function Signup() {
+  const Navigate = useNavigate();
+  
   //setting form variables and states
   const [formData, setFormData] = useState({
     username: "",
@@ -47,6 +50,7 @@ export function Signup() {
       }
 
       alert("User created!");
+      Navigate("/login");
     } catch (err) {
       setError(err.message || "Something went wrong");
     }
