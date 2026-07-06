@@ -35,12 +35,36 @@ function App() {
         <main className="content">
           <Routes>
             <Route index element={<Home loggedin={loggedin} />} />
-            <Route path="/posts" element={<Postpage loggedin={loggedin} setUser={setUser} user={user} />} />
-            <Route path="/login" element={<Login setloggedin={setloggedin} setUser={setUser} user={user} />} />
+            <Route
+              path="/posts"
+              element={
+                <Postpage loggedin={loggedin} setUser={setUser} user={user} />
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <Login
+                  setloggedin={setloggedin}
+                  setUser={setUser}
+                  user={user}
+                />
+              }
+            />
             <Route path="/signup" element={<Signup />} />
             <Route path="/forgot-password" element={<Forgotpass />} />
             <Route path="/reset-password/:token" element={<Resetpass />} />
-            <Route path="/accountdeets" element={<AccountDetails setloggedin={setloggedin} loggedin={loggedin} setUser={setUser} user={user} />} />
+            <Route
+              path="/accountdeets"
+              element={
+                <AccountDetails
+                  setloggedin={setloggedin}
+                  loggedin={loggedin}
+                  setUser={setUser}
+                  user={user}
+                />
+              }
+            />
           </Routes>
         </main>
         <Footer loggedin={loggedin} />
