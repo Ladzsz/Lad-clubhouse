@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../assets/styles/signup.css";
 import { Link, useNavigate } from "react-router-dom";
 
-export function Login({ setloggedin }) {
+export function Login({ setloggedin, setUser }) {
   //setting form variables and states
   const [formData, setFormData] = useState({
     email: "",
@@ -38,8 +38,11 @@ export function Login({ setloggedin }) {
         throw new Error("Login failed");
       }
 
+      const data = await response.json();
+
       if (response.ok) {
         setloggedin(true);
+        setUser(data.user);
       }
       navigate("/");
     } catch (err) {

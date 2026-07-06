@@ -2,9 +2,10 @@ import "../assets/styles/accountdeets.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-function AccountDetails({ setloggedin, loggedin }) {
+function AccountDetails({ setloggedin, loggedin, user, setUser }) {
   const [error, setError] = useState("");
-  const [user, setUser] = useState(null);
+  const [editing, setEditing] = useState(false);
+  const [newUsername, setNewUsername] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -55,6 +56,50 @@ function AccountDetails({ setloggedin, loggedin }) {
     }
   };
 
+  //handling edit click
+  const handleEditClick = () => {
+    setNewUsername(user?.username || "");
+    setEditing(true);
+  };
+
+  //handle saving edit
+  const handleSaveEdit = async () => {
+    if (!newUsername.trim()) {
+      setError("Username cannot be empty");
+      return;
+    }
+
+    try {
+      const response = await fetch(`http://localhost:5000/api/users/profile/${user?.id}`, {
+        method: "PUT",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: newUsername,
+        }),
+      });
+
+      if (response.ok) {
+        const updatedUser = await response.json();
+        setEditing(false);
+        setUser(updatedUser);
+        alert("Profile updated successfully");
+      } else {
+        setError("Failed to update profile");
+      }
+    } catch (err) {
+      setError(err.message || "Failed to update profile");
+    }
+  };
+
+  //handle cancel edit
+  const handleCancel = () => {
+    setEditing(false);
+    setNewUsername("");
+  };
+
   return (
     <>
       {/*rendering the account details page*/}
@@ -72,21 +117,36 @@ function AccountDetails({ setloggedin, loggedin }) {
             </p>
           </div>
 
-          <div className="acc-btn-container">
+          {editing ? (
             <div className="account-deets-item">
-              <p className="editbtn btn">Edit account</p>
+              <label htmlFor="new-username" className="edit-label">Edit username</label>
+              <input 
+                id="new-username"
+                type="text" 
+                placeholder="enter new username" 
+                value={newUsername}
+                onChange={(e) => setNewUsername(e.target.value)}
+              />
+              <button className="btn" onClick={handleSaveEdit}>Save Changes</button>
+              <button className="btn" onClick={handleCancel}>Cancel</button>
             </div>
+          ) : (
+            <div className="acc-btn-container">
+              <div className="account-deets-item">
+                <p className="editbtn btn" onClick={handleEditClick}>Edit account</p>
+              </div>
 
-            <div className="account-deets-item">
-              <p className="deletebtn btn">delete account</p>
-            </div>
+              <div className="account-deets-item">
+                <p className="deletebtn btn">delete account</p>
+              </div>
 
-            <div className="account-deets-item">
-              <p className="logoutbtn btn" onClick={handleLogout}>
-                Logout
-              </p>
+              <div className="account-deets-item">
+                <p className="logoutbtn btn" onClick={handleLogout}>
+                  Logout
+                </p>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </section>
     </>
