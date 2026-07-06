@@ -103,6 +103,34 @@ function AccountDetails({ setloggedin, loggedin, user, setUser }) {
     setNewUsername("");
   };
 
+  //handle delete account
+  const handleDeleteAccount = async () => {
+    if (!window.confirm("Are you sure you want to delete your account?")) {
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/users/profile/${user?.id}`,
+        {
+          method: "DELETE",
+          credentials: "include",
+        },
+      );
+
+      if (response.ok) {
+        setloggedin(false);
+        setUser(null);
+        alert("Account deleted successfully");
+        navigate("/signup");
+      } else {
+        setError("Failed to delete account");
+      }
+    } catch (err) {
+      setError(err.message || "Failed to delete account");
+    }
+  };
+
   return (
     <>
       {/*rendering the account details page*/}
@@ -148,7 +176,9 @@ function AccountDetails({ setloggedin, loggedin, user, setUser }) {
               </div>
 
               <div className="account-deets-item">
-                <p className="deletebtn btn">delete account</p>
+                <p className="deletebtn btn" onClick={handleDeleteAccount}>
+                  delete account
+                </p>
               </div>
 
               <div className="account-deets-item">
