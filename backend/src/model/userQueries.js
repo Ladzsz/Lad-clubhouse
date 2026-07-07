@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 //query to get users username and created at
 export const getUserDetails = async (userId) => {
   const res = await pool.query(
-    "SELECT username, createdat FROM users WHERE id = $1",
+    "SELECT id, username, createdat FROM users WHERE id = $1",
     [userId],
   );
   return res.rows[0];
