@@ -4,7 +4,7 @@ import {
   deleteUser,
   saveResetToken,
   updatePassword,
-  getUserDetails
+  getUserDetails,
 } from "../model/userQueries.js";
 import { generateResetToken, sendResetEmail } from "../utils/emailService.js";
 import { pool } from "../model/pool.js";
@@ -12,7 +12,7 @@ import crypto from "crypto";
 
 export const getUserDetailsController = async (req, res) => {
   try {
-    const userId = req.user.id; 
+    const userId = req.user.id;
     const userDetails = await getUserDetails(userId);
     res.json(userDetails);
   } catch (err) {

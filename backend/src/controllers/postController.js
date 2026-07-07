@@ -10,19 +10,18 @@ import { pool } from "../model/pool.js";
 
 //helper funcitons to validate text legnth
 function validateContent(text) {
-  if (typeof text === 'string' && text.length <= 500) {
+  if (typeof text === "string" && text.length <= 500) {
     return true;
   }
   return false;
 }
 
 function validateTitle(text) {
-  if (typeof text === 'string' && text.length <= 75) {
+  if (typeof text === "string" && text.length <= 75) {
     return true;
   }
   return false;
 }
-
 
 //controller to create a new post
 export const createPostController = async (req, res) => {
@@ -39,11 +38,15 @@ export const createPostController = async (req, res) => {
   }
 
   if (!validateTitle(title)) {
-    return res.status(400).json({ error: "Title must be 75 characters or less" });
+    return res
+      .status(400)
+      .json({ error: "Title must be 75 characters or less" });
   }
 
   if (!validateContent(content)) {
-    return res.status(400).json({ error: "Content must be 500 characters or less" });
+    return res
+      .status(400)
+      .json({ error: "Content must be 500 characters or less" });
   }
 
   //creating post
@@ -102,11 +105,15 @@ export const editPostController = async (req, res) => {
     }
 
     if (!validateTitle(title)) {
-      return res.status(400).json({ error: "Title must be 75 characters or less" });
+      return res
+        .status(400)
+        .json({ error: "Title must be 75 characters or less" });
     }
 
     if (!validateContent(content)) {
-      return res.status(400).json({ error: "Content must be 500 characters or less" });
+      return res
+        .status(400)
+        .json({ error: "Content must be 500 characters or less" });
     }
 
     const updatedPost = await editPost(id, title, content);
