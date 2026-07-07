@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export function Signup() {
   const Navigate = useNavigate();
-  
+
   //setting form variables and states
   const [formData, setFormData] = useState({
     username: "",
