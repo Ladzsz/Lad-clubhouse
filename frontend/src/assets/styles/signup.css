@@ -63,7 +63,7 @@
 }
 
 /*createpost text area*/
-.createpost-textarea{
+.createpost-textarea {
   min-width: 500px;
   padding: 8px;
   margin-top: 5px;
@@ -73,14 +73,13 @@
 
 /*media quereis for tablets and mobile devices*/
 @media (max-width: 768px) {
-  .createpost-textarea{
+  .createpost-textarea {
     min-width: 350px;
   }
 }
 
 @media (max-width: 480px) {
-  .createpost-textarea{
+  .createpost-textarea {
     min-width: 250px;
   }
 }
-

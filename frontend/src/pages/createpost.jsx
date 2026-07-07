@@ -3,7 +3,7 @@ import "../assets/styles/signup.css";
 import { useNavigate } from "react-router-dom";
 import { fetchUserDetails } from "../utils/fetchUsers";
 
-export function CreatePost( { user, setUser, loggedin } ) {
+export function CreatePost({ user, setUser, loggedin }) {
   const Navigate = useNavigate();
 
   //setting form variables and states
@@ -13,14 +13,14 @@ export function CreatePost( { user, setUser, loggedin } ) {
   });
   const [error, setError] = useState("");
 
-//use effect to grab user details if logged in
+  //use effect to grab user details if logged in
   useEffect(() => {
-       fetchUserDetails({ setUser, setError });
-    
-        if (loggedin) {
-          fetchUserDetails({ setUser, setError });
-        }
-      }, [loggedin]);
+    fetchUserDetails({ setUser, setError });
+
+    if (loggedin) {
+      fetchUserDetails({ setUser, setError });
+    }
+  }, [loggedin]);
 
   //handling form change
   const handleChange = (e) => {
@@ -35,21 +35,23 @@ export function CreatePost( { user, setUser, loggedin } ) {
 
     //api call to create user
     try {
-    const response = await fetch(`http://localhost:5000/api/posts/createpost/${user?.id}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        `http://localhost:5000/api/posts/createpost/${user?.id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            title: formData.title,
+            content: formData.content,
+          }),
         },
-        credentials: "include",
-        body: JSON.stringify({
-          title: formData.title,
-          content: formData.content,
-        }),
-      });
+      );
 
       if (!response.ok) {
         throw new Error("Post creation failed");
-        
       }
 
       alert("Post created!");
@@ -75,7 +77,7 @@ export function CreatePost( { user, setUser, loggedin } ) {
             value={formData.title}
             onChange={handleChange}
             required
-            maxlength="75" 
+            maxlength="75"
           />
         </div>
 
@@ -88,7 +90,7 @@ export function CreatePost( { user, setUser, loggedin } ) {
             value={formData.content}
             onChange={handleChange}
             required
-            maxlength="500" 
+            maxlength="500"
           />
         </div>
 

@@ -10,14 +10,14 @@ function AccountDetails({ setloggedin, loggedin, user, setUser }) {
   const navigate = useNavigate();
 
   //use effect to grab user details if logged in
-    useEffect(() => {
-         fetchUserDetails({ setUser, setError });
-      
-          if (loggedin) {
-            fetchUserDetails({ setUser, setError });
-          }
-        }, [loggedin]);
-        
+  useEffect(() => {
+    fetchUserDetails({ setUser, setError });
+
+    if (loggedin) {
+      fetchUserDetails({ setUser, setError });
+    }
+  }, [loggedin]);
+
   //handling logout
   const handleLogout = async () => {
     try {

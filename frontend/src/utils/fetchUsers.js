@@ -1,5 +1,5 @@
 export async function fetchUserDetails({ setUser, setError } = {}) {
-    //grabbing user details
+  //grabbing user details
   try {
     const response = await fetch("http://localhost:5000/api/users", {
       method: "GET",
