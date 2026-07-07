@@ -1,6 +1,7 @@
 import "../assets/styles/accountdeets.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { fetchUserDetails } from "../utils/fetchUsers";
 
 function AccountDetails({ setloggedin, loggedin, user, setUser }) {
   const [error, setError] = useState("");
@@ -8,34 +9,15 @@ function AccountDetails({ setloggedin, loggedin, user, setUser }) {
   const [newUsername, setNewUsername] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    //fetching user details from the backend
-    async function fetchUserDetails() {
-      try {
-        const response = await fetch("http://localhost:5000/api/users", {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error("Unable to load account details");
-        }
-
-        const data = await response.json();
-        setUser(data);
-      } catch (err) {
-        setError(err.message || "Something went wrong");
-      }
-    }
-
-    if (loggedin) {
-      fetchUserDetails();
-    }
-  }, [loggedin]);
-
+  //use effect to grab user details if logged in
+    useEffect(() => {
+         fetchUserDetails({ setUser, setError });
+      
+          if (loggedin) {
+            fetchUserDetails({ setUser, setError });
+          }
+        }, [loggedin]);
+        
   //handling logout
   const handleLogout = async () => {
     try {
