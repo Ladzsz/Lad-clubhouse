@@ -8,11 +8,28 @@ import {
 } from "../model/postQueries.js";
 import { pool } from "../model/pool.js";
 
+//helper funcitons to validate text legnth
+function validateContent(text) {
+  if (typeof text === 'string' && text.length <= 500) {
+    return true;
+  }
+  return false;
+}
+
+function validateTitle(text) {
+  if (typeof text === 'string' && text.length <= 75) {
+    return true;
+  }
+  return false;
+}
+
+
 //controller to create a new post
 export const createPostController = async (req, res) => {
   const { title, content } = req.body;
   const poster = req.params.id;
 
+  //error handling for missing fields and validation
   if (!title || !content) {
     return res.status(400).json({ error: "Title and content are required" });
   }
@@ -21,6 +38,15 @@ export const createPostController = async (req, res) => {
     return res.status(400).json({ error: "Poster is required" });
   }
 
+  if (!validateTitle(title)) {
+    return res.status(400).json({ error: "Title must be 75 characters or less" });
+  }
+
+  if (!validateContent(content)) {
+    return res.status(400).json({ error: "Content must be 500 characters or less" });
+  }
+
+  //creating post
   try {
     const newPost = await createPost(poster, title, content);
     res.status(200).json(newPost);
@@ -68,6 +94,19 @@ export const editPostController = async (req, res) => {
       return res.status(403).json({
         message: "Unauthorized: you cannot manipulate this post.",
       });
+    }
+
+    //error handling for missing fields and validation
+    if (!title || !content) {
+      return res.status(400).json({ error: "Title and content are required" });
+    }
+
+    if (!validateTitle(title)) {
+      return res.status(400).json({ error: "Title must be 75 characters or less" });
+    }
+
+    if (!validateContent(content)) {
+      return res.status(400).json({ error: "Content must be 500 characters or less" });
     }
 
     const updatedPost = await editPost(id, title, content);
