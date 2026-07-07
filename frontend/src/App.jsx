@@ -10,6 +10,7 @@ import Footer from "./components/footer";
 import AccountDetails from "./pages/accountdetails";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
+import CreatePost from "./pages/createpost";
 
 function App() {
   const [loggedin, setloggedin] = useState(false);
@@ -54,6 +55,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/forgot-password" element={<Forgotpass />} />
             <Route path="/reset-password/:token" element={<Resetpass />} />
+            <Route path="/createpost" element={<CreatePost user={user} />} />
             <Route
               path="/accountdeets"
               element={

@@ -59,7 +59,7 @@ function Postpage({ loggedin }) {
         {loggedin ? (
           <div className="postcard-footer">
             <p>posted by: testuser</p>
-            <p>date: 2023-06-01</p>
+            <p>user joined: 2023-06-01</p>
           </div>
         ) : (
           <div className="postcard-footer">

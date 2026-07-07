@@ -61,3 +61,26 @@
   list-style-type: none;
   margin-top: 10px;
 }
+
+/*createpost text area*/
+.createpost-textarea{
+  min-width: 500px;
+  padding: 8px;
+  margin-top: 5px;
+  resize: vertical;
+  min-height: 300px;
+}
+
+/*media quereis for tablets and mobile devices*/
+@media (max-width: 768px) {
+  .createpost-textarea{
+    min-width: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+  .createpost-textarea{
+    min-width: 250px;
+  }
+}
+

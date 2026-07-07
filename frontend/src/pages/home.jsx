@@ -37,6 +37,10 @@ function Home({ loggedin }) {
               <button className="home-btn">Log in!</button>
             </Link>
           )}
+
+          <Link to="createpost">
+              <button className="home-btn">Create Post!</button>
+            </Link>
         </div>
       </section>
     </>
