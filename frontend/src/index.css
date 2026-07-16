@@ -159,6 +159,11 @@ ul {
   background: var(--warning-light);
 }
 
+.btn:disabled {
+  background: var(--primary-light);
+  color: var(--text-muted);
+}
+
 /* ==========================
    CARD
 ========================== */
