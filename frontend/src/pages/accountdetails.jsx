@@ -126,15 +126,16 @@ function AccountDetails({ setloggedin, loggedin, user, setUser }) {
               {loggedin ? user?.username || "Loading..." : "Not logged in"}
             </p>
             <p>
-              Account Created: {loggedin ? user?.createdat || "Loading..." : ""}
+              Account Created: {loggedin ? new Date(user?.createdat).toLocaleDateString() || "Loading..." : ""}
             </p>
           </div>
 
           {editing ? (
             <div className="account-deets-item">
-              <div className="form-heading">
-                <label htmlFor="new-username" className="edit-label">
-                  Edit username
+              
+             <div className="form-heading">
+                  <label htmlFor="new-username" className="edit-label">
+                    Edit username
                 </label>
 
                 <p>({newUsername.length} / 24)</p>
