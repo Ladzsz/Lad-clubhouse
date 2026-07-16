@@ -132,15 +132,21 @@ function AccountDetails({ setloggedin, loggedin, user, setUser }) {
 
           {editing ? (
             <div className="account-deets-item">
-              <label htmlFor="new-username" className="edit-label">
-                Edit username
-              </label>
+
+             <div className="form-heading">
+                  <label htmlFor="new-username" className="edit-label">
+                    Edit username
+                </label>
+
+                <p>({newUsername.length} / 24)</p>
+              </div>
               <input
                 id="new-username"
                 type="text"
                 placeholder="enter new username"
                 value={newUsername}
                 onChange={(e) => setNewUsername(e.target.value)}
+                maxLength="24"
               />
               <button className="btn" onClick={handleSaveEdit}>
                 Save Changes

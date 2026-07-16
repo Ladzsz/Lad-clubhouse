@@ -10,6 +10,13 @@ import { generateResetToken, sendResetEmail } from "../utils/emailService.js";
 import { pool } from "../model/pool.js";
 import crypto from "crypto";
 
+function validateUser(text) {
+  if (typeof text === "string" && text.length <= 24) {
+    return true;
+  }
+  return false;
+}
+
 export const getUserDetailsController = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -24,6 +31,13 @@ export const getUserDetailsController = async (req, res) => {
 //create user controller
 export const registerUser = async (req, res) => {
   const { username, email, password } = req.body;
+
+  if (!validateUser(username)) {
+    return res
+      .status(400)
+      .json({ error: "Title must be 24 characters or less" });
+  }
+
   try {
     const newUser = await createUser(username, email, password);
     res.status(201).json(newUser);
@@ -37,6 +51,13 @@ export const registerUser = async (req, res) => {
 export const editUserProfile = async (req, res) => {
   const userId = req.params.id;
   const { username } = req.body;
+
+  if (!validateUser(username)) {
+    return res
+      .status(400)
+      .json({ error: "Title must be 24 characters or less" });
+  }
+
   try {
     // check user
     if (String(req.user.id) !== String(req.params.id)) {
