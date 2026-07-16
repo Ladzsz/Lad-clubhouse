@@ -132,10 +132,9 @@ function AccountDetails({ setloggedin, loggedin, user, setUser }) {
 
           {editing ? (
             <div className="account-deets-item">
-
-             <div className="form-heading">
-                  <label htmlFor="new-username" className="edit-label">
-                    Edit username
+              <div className="form-heading">
+                <label htmlFor="new-username" className="edit-label">
+                  Edit username
                 </label>
 
                 <p>({newUsername.length} / 24)</p>

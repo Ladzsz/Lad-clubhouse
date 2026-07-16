@@ -64,11 +64,10 @@ export function Signup() {
       <form onSubmit={handleSubmit} method="POST" className="signup-form">
         {/*form inputs*/}
         <div className="form-input-container">
-          
-           <div className="form-heading">
-              <label htmlFor="content">Username:</label>
+          <div className="form-heading">
+            <label htmlFor="content">Username:</label>
 
-              <p>({formData.username.length} / 24)</p>
+            <p>({formData.username.length} / 24)</p>
           </div>
 
           <input

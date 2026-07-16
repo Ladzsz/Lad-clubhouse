@@ -69,12 +69,12 @@ export function CreatePost({ user, setUser, loggedin }) {
       <form onSubmit={handleSubmit} method="POST" className="signup-form">
         {/*form inputs*/}
         <div className="form-input-container">
-         <div className="form-heading">
-              <label htmlFor="title">Title:</label>
+          <div className="form-heading">
+            <label htmlFor="title">Title:</label>
 
-              <p>({formData.title.length} / 75)</p>
-         </div>
-          
+            <p>({formData.title.length} / 75)</p>
+          </div>
+
           <input
             type="text"
             id="title"
@@ -87,11 +87,10 @@ export function CreatePost({ user, setUser, loggedin }) {
         </div>
 
         <div className="form-input-container">
-
           <div className="form-heading">
-              <label htmlFor="content">Content:</label>
+            <label htmlFor="content">Content:</label>
 
-              <p>({formData.content.length} / 500)</p>
+            <p>({formData.content.length} / 500)</p>
           </div>
 
           <textarea
