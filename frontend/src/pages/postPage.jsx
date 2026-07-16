@@ -78,13 +78,21 @@ function Postpage({ loggedin }) {
       {/* pagination controls */}
       {totalPages > 1 && (
         <div className="pagination-container">
-          <button className="btn" onClick={handlePrevPage} disabled={currentPage === 1}>
+          <button
+            className="btn"
+            onClick={handlePrevPage}
+            disabled={currentPage === 1}
+          >
             Previous
           </button>
           <p>
             Page {currentPage} of {totalPages}
           </p>
-          <button className="btn" onClick={handleNextPage} disabled={currentPage === totalPages}>
+          <button
+            className="btn"
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+          >
             Next
           </button>
         </div>
