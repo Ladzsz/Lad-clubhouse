@@ -2,9 +2,11 @@ import "../assets/styles/posts.css";
 import { useState, useEffect } from "react";
 
 function Postpage({ loggedin }) {
+  //setting states
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState("");
 
+  //use effect tov grab post data
   useEffect(() => {
     const fetchPosts = async () => {
       setError("");
@@ -21,6 +23,7 @@ function Postpage({ loggedin }) {
     fetchPosts();
   }, []);
 
+ //rendering posts
   return (
     <div className="postpage">
       {error && <p style={{ color: "red" }}>{error}</p>}
@@ -35,7 +38,10 @@ function Postpage({ loggedin }) {
             <div className="postcard-footer">
               <p>posted by: {post.poster_username || "unknown"}</p>
               <p>
-                user joined: {post.poster_createdat ? new Date(post.poster_createdat).toLocaleDateString() : "unknown"}
+                user joined:{" "}
+                {post.poster_createdat
+                  ? new Date(post.poster_createdat).toLocaleDateString()
+                  : "unknown"}
               </p>
             </div>
           ) : (
