@@ -127,7 +127,7 @@ export const deletePostController = async (req, res) => {
         message: "Unauthorized: you cannot manipulate this post.",
       });
     }
-    
+
     res.json({ message: "Post deleted successfully" });
   } catch (err) {
     console.error(err);
