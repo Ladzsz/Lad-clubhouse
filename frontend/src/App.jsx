@@ -23,13 +23,13 @@ function App() {
       credentials: "include",
     })
       .then((res) => {
-      if (res.ok) return res.json();
-      throw new Error("Not authenticated");
-    })
-    .then((data) => {
-      setloggedin(true);
-      setUser(data.user);
-    })
+        if (res.ok) return res.json();
+        throw new Error("Not authenticated");
+      })
+      .then((data) => {
+        setloggedin(true);
+        setUser(data.user);
+      })
       .catch(console.error);
   }, []);
 
@@ -60,7 +60,12 @@ function App() {
             <Route path="/forgot-password" element={<Forgotpass />} />
             <Route path="/reset-password/:token" element={<Resetpass />} />
             <Route path="/createpost" element={<CreatePost user={user} />} />
-            <Route path="/editpost" element={<Editpost user={user} loggedin={loggedin} setUser={setUser} />} />
+            <Route
+              path="/editpost"
+              element={
+                <Editpost user={user} loggedin={loggedin} setUser={setUser} />
+              }
+            />
             <Route
               path="/accountdeets"
               element={

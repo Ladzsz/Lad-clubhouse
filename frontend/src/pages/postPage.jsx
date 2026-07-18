@@ -71,71 +71,75 @@ function Postpage({ loggedin, user }) {
     }
   };
 
- // rendering posts
-return (
-  <div className="postpage">
-    {error && <p style={{ color: "red" }}>{error}</p>}
+  // rendering posts
+  return (
+    <div className="postpage">
+      {error && <p style={{ color: "red" }}>{error}</p>}
 
-    {currentPosts.map((post) => (
-      <div className="postcard" key={post.id}>
-        <h1 className="postcard-title">{post.title}</h1>
+      {currentPosts.map((post) => (
+        <div className="postcard" key={post.id}>
+          <h1 className="postcard-title">{post.title}</h1>
 
-        <div className="postcard-content">
-          <p>{post.content}</p>
+          <div className="postcard-content">
+            <p>{post.content}</p>
+          </div>
+
+          {loggedin ? (
+            <div className="postcard-footer">
+              <p>posted by: {post.poster_username || "unknown"}</p>
+              <p>
+                user joined:{" "}
+                {post.poster_createdat
+                  ? new Date(post.poster_createdat).toLocaleDateString()
+                  : "unknown"}
+              </p>
+            </div>
+          ) : (
+            <div className="postcard-footer">
+              <p>please login to see the screecher!</p>
+            </div>
+          )}
+
+          {/* edit and delete buttons */}
+          {loggedin && String(user?.id) === String(post.poster) && (
+            <div className="post-btns">
+              <Link to="/editpost" className="btn">
+                Edit
+              </Link>
+              <button className="btn" onClick={() => handleDeletePost(post.id)}>
+                Delete
+              </button>
+            </div>
+          )}
         </div>
+      ))}
 
-        {loggedin ? (
-          <div className="postcard-footer">
-            <p>posted by: {post.poster_username || "unknown"}</p>
-            <p>
-              user joined:{" "}
-              {post.poster_createdat
-                ? new Date(post.poster_createdat).toLocaleDateString()
-                : "unknown"}
-            </p>
-          </div>
-        ) : (
-          <div className="postcard-footer">
-            <p>please login to see the screecher!</p>
-          </div>
-        )}
+      {/* pagination controls */}
+      {totalPages > 1 && (
+        <div className="pagination-container">
+          <button
+            className="btn"
+            onClick={handlePrevPage}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
 
-        {/* edit and delete buttons */}
-        {loggedin && String(user?.id) === String(post.poster) && (
-          <div className="post-btns">
-            <Link to="/editpost" className="btn">Edit</Link>
-            <button className="btn" onClick={() => handleDeletePost(post.id)}>Delete</button>
-          </div>
-        )}
-      </div>
-    ))}
+          <p>
+            Page {currentPage} of {totalPages}
+          </p>
 
-    {/* pagination controls */}
-    {totalPages > 1 && (
-      <div className="pagination-container">
-        <button
-          className="btn"
-          onClick={handlePrevPage}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </button>
-
-        <p>
-          Page {currentPage} of {totalPages}
-        </p>
-
-        <button
-          className="btn"
-          onClick={handleNextPage}
-          disabled={currentPage === totalPages}
-        >
-          Next
-        </button>
-      </div>
-    )}
-  </div>
-);
+          <button
+            className="btn"
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default Postpage;
