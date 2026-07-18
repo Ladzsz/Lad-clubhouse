@@ -133,12 +133,15 @@ export const deletePostController = async (req, res) => {
     ]);
 
     // ownership check
-    if (String(req.user.id) !== String(post.rows[0].poster)) {
+    if (!post.rows.length || String(req.user.id) !== String(post.rows[0].poster)) {
       return res.status(403).json({
         message: "Unauthorized: you cannot manipulate this post.",
       });
     }
-    await deletePost(id);
+    const deleted = await deletePost(id, req.user.id);
+    if (!deleted) {
+      return res.status(404).json({ error: "Post not found or not owned by user" });
+    }
     res.json({ message: "Post deleted successfully" });
   } catch (err) {
     console.error(err);

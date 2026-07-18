@@ -36,10 +36,11 @@ export const editPost = async (id, title, content) => {
   return res.rows[0];
 };
 
-//query to delete post
-export const deletePost = async (id) => {
-  const res = await pool.query("DELETE FROM posts WHERE id = $1 RETURNING *", [
-    id,
-  ]);
+//query to delete post by id and poster
+export const deletePost = async (id, poster) => {
+  const res = await pool.query(
+    "DELETE FROM posts WHERE id = $1 AND poster = $2 RETURNING *",
+    [id, poster],
+  );
   return res.rows[0];
 };
