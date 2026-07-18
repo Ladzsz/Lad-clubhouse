@@ -86,18 +86,6 @@ export const editPostController = async (req, res) => {
   const { id } = req.params;
   const { title, content } = req.body;
   try {
-    //grabbing post
-    const post = await pool.query("SELECT * FROM posts WHERE id = $1", [
-      req.params.id,
-    ]);
-
-    // ownership check
-    if (String(req.user.id) !== String(post.rows[0].poster)) {
-      return res.status(403).json({
-        message: "Unauthorized: you cannot manipulate this post.",
-      });
-    }
-
     //error handling for missing fields and validation
     if (!title || !content) {
       return res.status(400).json({ error: "Title and content are required" });
@@ -115,7 +103,12 @@ export const editPostController = async (req, res) => {
         .json({ error: "Content must be 500 characters or less" });
     }
 
-    const updatedPost = await editPost(id, title, content);
+    const updatedPost = await editPost(id, title, content, req.user.id);
+    if (!updatedPost) {
+      return res.status(403).json({
+        message: "Unauthorized: you cannot manipulate this post.",
+      });
+    }
     res.json(updatedPost);
   } catch (err) {
     console.error(err);
@@ -126,22 +119,15 @@ export const editPostController = async (req, res) => {
 //controller to delete a post
 export const deletePostController = async (req, res) => {
   const { id } = req.params;
-  try {
-    //grabbing post
-    const post = await pool.query("SELECT * FROM posts WHERE id = $1", [
-      req.params.id,
-    ]);
 
-    // ownership check
-    if (!post.rows.length || String(req.user.id) !== String(post.rows[0].poster)) {
+  try {
+    const deleted = await deletePost(id, req.user.id);
+    if (!deleted) {
       return res.status(403).json({
         message: "Unauthorized: you cannot manipulate this post.",
       });
     }
-    const deleted = await deletePost(id, req.user.id);
-    if (!deleted) {
-      return res.status(404).json({ error: "Post not found or not owned by user" });
-    }
+    
     res.json({ message: "Post deleted successfully" });
   } catch (err) {
     console.error(err);

@@ -28,10 +28,10 @@ export const searchPostsByTitle = async (title) => {
 };
 
 //query to edit posts
-export const editPost = async (id, title, content) => {
+export const editPost = async (id, title, content, poster) => {
   const res = await pool.query(
-    "UPDATE posts SET title = $1, content = $2 WHERE id = $3 RETURNING *",
-    [title, content, id],
+    "UPDATE posts SET title = $1, content = $2 WHERE id = $3 AND poster = $4 RETURNING *",
+    [title, content, id, poster],
   );
   return res.rows[0];
 };
