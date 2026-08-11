@@ -103,7 +103,11 @@ function Postpage({ loggedin, user }) {
           {/* edit and delete buttons */}
           {loggedin && String(user?.id) === String(post.poster) && (
             <div className="post-btns">
-              <Link to="/editpost" className="btn">
+              <Link
+                to={`/editpost/${post.id}`}
+                state={{ post }}
+                className="btn"
+              >
                 Edit
               </Link>
               <button className="btn" onClick={() => handleDeletePost(post.id)}>

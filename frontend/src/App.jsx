@@ -61,7 +61,7 @@ function App() {
             <Route path="/reset-password/:token" element={<Resetpass />} />
             <Route path="/createpost" element={<CreatePost user={user} />} />
             <Route
-              path="/editpost"
+              path="/editpost/:id"
               element={
                 <Editpost user={user} loggedin={loggedin} setUser={setUser} />
               }
