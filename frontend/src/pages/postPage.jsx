@@ -1,6 +1,7 @@
 import "../assets/styles/posts.css";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Searchbar from "../components/searchbar";
 
 function Postpage({ loggedin, user }) {
   //setting states
@@ -25,6 +26,34 @@ function Postpage({ loggedin, user }) {
 
     fetchPosts();
   }, []);
+
+  //handle search function
+  const handleSearch = async (term) => {
+    setError("");
+    setCurrentPage(1);
+
+    //fallback if search is empty
+    try {
+      if (!term) {
+        const response = await fetch("http://localhost:5000/api/posts");
+        if (!response.ok) throw new Error("Failed to load posts");
+        const data = await response.json();
+        setPosts(data);
+        return;
+      }
+
+      //actual search api call
+      const response = await fetch(
+        `http://localhost:5000/api/posts/search/${encodeURIComponent(term)}`,
+      );
+      if (!response.ok) throw new Error("No posts found :(");
+      const data = await response.json();
+      setPosts(data);
+    } catch (err) {
+      setError(err.message || "Something went wrong");
+      setPosts([]);
+    }
+  };
 
   //pagination calculations
   const totalPages = Math.ceil(posts.length / postsPerPage);
@@ -74,6 +103,7 @@ function Postpage({ loggedin, user }) {
   // rendering posts
   return (
     <div className="postpage">
+      <Searchbar onSearch={handleSearch} />
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       {currentPosts.map((post) => (
