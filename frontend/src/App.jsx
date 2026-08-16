@@ -19,7 +19,7 @@ function App() {
 
   //setting login to true from the backend
   useEffect(() => {
-    fetch("http://localhost:5000/api/users/me", {
+    fetch("https://lad-clubhouse.onrender.com/api/users/me", {
       credentials: "include",
     })
       .then((res) => {

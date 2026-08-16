@@ -36,7 +36,7 @@ export function CreatePost({ user, setUser, loggedin }) {
     //api call to create user
     try {
       const response = await fetch(
-        `http://localhost:5000/api/posts/createpost/${user?.id}`,
+        `https://lad-clubhouse.onrender.com/api/posts/createpost/${user?.id}`,
         {
           method: "POST",
           headers: {

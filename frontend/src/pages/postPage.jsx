@@ -15,7 +15,7 @@ function Postpage({ loggedin, user }) {
     const fetchPosts = async () => {
       setError("");
       try {
-        const response = await fetch("http://localhost:5000/api/posts");
+        const response = await fetch("https://lad-clubhouse.onrender.com/api/posts");
         if (!response.ok) throw new Error("uh oh no posts to display :(");
         const data = await response.json();
         setPosts(data);
@@ -35,7 +35,7 @@ function Postpage({ loggedin, user }) {
     //fallback if search is empty
     try {
       if (!term) {
-        const response = await fetch("http://localhost:5000/api/posts");
+        const response = await fetch("https://lad-clubhouse.onrender.com/api/posts");
         if (!response.ok) throw new Error("Failed to load posts");
         const data = await response.json();
         setPosts(data);
@@ -44,7 +44,7 @@ function Postpage({ loggedin, user }) {
 
       //actual search api call
       const response = await fetch(
-        `http://localhost:5000/api/posts/search/${encodeURIComponent(term)}`,
+        `https://lad-clubhouse.onrender.com/api/posts/search/${encodeURIComponent(term)}`,
       );
       if (!response.ok) throw new Error("No posts found :(");
       const data = await response.json();
@@ -82,7 +82,7 @@ function Postpage({ loggedin, user }) {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/posts/deletepost/${postId}`,
+        `https://lad-clubhouse.onrender.com/api/posts/deletepost/${postId}`,
         {
           method: "DELETE",
           credentials: "include",

@@ -48,7 +48,7 @@ export function Editpost({ setUser, loggedin }) {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/posts/editpost/${id}`,
+        `https://lad-clubhouse.onrender.com/api/posts/editpost/${id}`,
         {
           method: "PUT",
           headers: {

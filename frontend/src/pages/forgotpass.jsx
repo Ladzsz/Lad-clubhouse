@@ -24,7 +24,7 @@ export function Forgotpass() {
     //api call to login user
     try {
       const response = await fetch(
-        "http://localhost:5000/api/users/reset-password",
+        "https://lad-clubhouse.onrender.com/api/users/reset-password",
         {
           method: "POST",
           headers: {

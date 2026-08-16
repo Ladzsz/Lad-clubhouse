@@ -34,7 +34,7 @@ export function Resetpass() {
     // try block for password reset
     try {
       const response = await fetch(
-        `http://localhost:5000/api/users/confirm-reset-password/${token}`,
+        `https://lad-clubhouse.onrender.com/api/users/confirm-reset-password/${token}`,
         {
           method: "POST",
           headers: {

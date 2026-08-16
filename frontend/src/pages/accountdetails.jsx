@@ -21,7 +21,7 @@ function AccountDetails({ setloggedin, loggedin, user, setUser }) {
   //handling logout
   const handleLogout = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/users/logout", {
+      const response = await fetch("https://lad-clubhouse.onrender.com/api/users/logout", {
         method: "POST",
         credentials: "include",
       });
@@ -53,7 +53,7 @@ function AccountDetails({ setloggedin, loggedin, user, setUser }) {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/users/profile/${user?.id}`,
+        `https://lad-clubhouse.onrender.com/api/users/profile/${user?.id}`,
         {
           method: "PUT",
           credentials: "include",
@@ -93,7 +93,7 @@ function AccountDetails({ setloggedin, loggedin, user, setUser }) {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/users/profile/${user?.id}`,
+        `http:///api/users/profile/${user?.id}`,
         {
           method: "DELETE",
           credentials: "include",
