@@ -32,6 +32,7 @@ app.use(express.urlencoded({ extended: true }));
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, "..", "public")));
+app.set("trust proxy", 1);
 
 // Initialize Passport
 app.use(
@@ -41,6 +42,9 @@ app.use(
     saveUninitialized: false,
     cookie: {
       maxAge: 1000 * 60 * 60 * 24, // 1 day
+      secure: true,
+      httpOnly: true,
+      sameSite: "none",
     },
   }),
 );
